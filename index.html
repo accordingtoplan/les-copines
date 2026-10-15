@@ -122,7 +122,9 @@ h1,h2,h3,.display{font-weight:500;letter-spacing:-.035em;line-height:.95}
   .intro .wrap,.services .wrap,.ov-head .wrap,.ov-text .wrap,.meta,.svc{grid-template-columns:1fr}
   .case .row{--n:2 !important}
   .case .row .ph:nth-child(3){display:none}
-  .ov .row{--n:1 !important}
+  .gal{display:grid;grid-template-columns:1fr 1fr;gap:var(--gap)}
+  .gal .row{display:contents}
+  .gal .solo{grid-column:span 2}
   .ov-bar .links{display:none}
   .about .wrap{grid-template-columns:1fr}
   .about .text{grid-column:auto;padding:0 0 32px}
@@ -253,8 +255,8 @@ const CASES = [
   }
 ];
 const img = k => `img/${k}.jpg`;
-const ph = (k,alt) => `<div class="ph"><img src="${img(k)}" alt="${alt}" loading="lazy"></div>`;
-const row = (ks,alt) => `<div class="row" style="--n:${ks.length}">${ks.map(k=>ph(k,alt)).join('')}</div>`;
+const ph = (k,alt,cls='') => `<div class="ph ${cls}"><img src="${img(k)}" alt="${alt}" loading="lazy"></div>`;
+const row = (ks,alt,last) => `<div class="row" style="--n:${ks.length}">${ks.map(k=>ph(k,alt,k===last?'solo':'')).join('')}</div>`;
 
 // gallery rhythm: 2, 3, 2, 3 ... a lone last image joins the row before it
 function rows(list){
@@ -284,7 +286,7 @@ function openCase(id, push=true){
     <div class="ov-head"><div class="wrap"><h2>${c.name}</h2>
       <dl><dt>Client</dt><dd>${c.sector}</dd><dt>Place</dt><dd>${c.place}</dd><dt>Year</dt><dd>${c.year}</dd><dt>Scope</dt><dd>${c.scope}</dd></dl></div></div>
     <div class="ov-text"><div class="wrap"><span></span><div><p class="big">${c.lede}</p><p class="body">${c.body}</p></div></div></div>
-    <div class="wrap wide">${rows(c.gal).map(r=>row(r,c.name)).join('')}
+    <div class="wrap wide"><div class="gal">${rows(c.gal).map(r=>row(r,c.name,c.gal.length%2?c.gal[c.gal.length-1]:null)).join('')}</div>
     <a class="ov-next" data-id="${n.id}"><span class="dim">Next project</span><b>${n.name}</b></a></div>`;
   ov.classList.add('open'); ov.setAttribute('aria-hidden','false'); ov.scrollTop=0;
   document.body.style.overflow='hidden';

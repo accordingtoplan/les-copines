@@ -92,9 +92,6 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;letter
 .cp .next{border-top:1px solid var(--line);padding-top:16px;cursor:pointer}
 .cp .next:hover{text-decoration:underline}
 
-.vs{position:fixed;left:10px;bottom:10px;z-index:90;display:flex;background:var(--white);border:1px solid var(--line)}
-.vs a{padding:6px 10px}
-.vs a.on{background:var(--ink);color:#fff}
 
 @media (max-width:800px){
   .bar nav.l a:not(:first-child){display:none}
@@ -103,6 +100,10 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;letter
   .cp{grid-template-columns:1fr}
   .cp .side{position:static;min-height:0;order:-1}
 }
+/* version switcher (test versions), identical on every version */
+.vs{position:fixed;left:10px;bottom:10px;z-index:200;display:flex;gap:1px;padding:2px;background:rgba(255,255,255,.88);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border-radius:999px;box-shadow:0 0 0 1px rgba(0,0,0,.08);font:500 10px/1 "Helvetica Neue",Helvetica,Arial,sans-serif;letter-spacing:.02em;text-transform:none;color:#111}
+.vs a{padding:4px 7px;border-radius:999px;color:#111}
+.vs a.on{background:#111;color:#fff}
 </style>
 </head>
 <body>
@@ -162,7 +163,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;letter
   <div id="ovbody"></div>
 </div>
 
-<nav class="vs up" aria-label="Versions"><a href="../">V1</a><a href="./" class="on">V2</a><a href="../v3/">V3</a><a href="../v4/">V4</a></nav>
+<nav class="vs" aria-label="Versions"><a href="../">V1</a><a href="./" class="on">V2</a><a href="../v3/">V3</a><a href="../v4/">V4</a></nav>
 
 <script>
 const CASES = [

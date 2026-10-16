@@ -117,10 +117,6 @@ h1,h2,h3,.display{font-weight:500;letter-spacing:-.025em;line-height:.95}
 .ov-next{display:block;padding:clamp(64px,8vw,110px) 0;cursor:pointer}
 .ov-next b{display:block;font-size:clamp(32px,4.4vw,64px);font-weight:500;letter-spacing:-.035em;margin-top:8px}
 
-/* version switcher (test versions) */
-.vs{position:fixed;left:12px;bottom:12px;z-index:90;display:flex;background:#fff;border-radius:999px;padding:3px;font-size:12px;font-weight:500;box-shadow:0 1px 8px rgba(0,0,0,.12)}
-.vs a{padding:5px 11px;border-radius:999px}
-.vs a.on{background:var(--ink);color:#fff}
 
 @media (max-width:800px){
   .nav .links{display:none}
@@ -140,6 +136,10 @@ h1,h2,h3,.display{font-weight:500;letter-spacing:-.025em;line-height:.95}
   .case-cap{flex-direction:column;gap:8px}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none !important}}
+/* version switcher (test versions), identical on every version */
+.vs{position:fixed;left:10px;bottom:10px;z-index:200;display:flex;gap:1px;padding:2px;background:rgba(255,255,255,.88);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border-radius:999px;box-shadow:0 0 0 1px rgba(0,0,0,.08);font:500 10px/1 "Helvetica Neue",Helvetica,Arial,sans-serif;letter-spacing:.02em;text-transform:none;color:#111}
+.vs a{padding:4px 7px;border-radius:999px;color:#111}
+.vs a.on{background:#111;color:#fff}
 </style>
 </head>
 <body>

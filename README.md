@@ -22,5 +22,6 @@ Changes go live a minute after they are pushed to `main` (GitHub Pages).
 - `/v3/` V3: floating panel nav, bento grid, filters, grid/list toggle, case drawer (after Hard Sun and Köppen).
 
 - `/v4/` V4: V1 layout set in Funnel Display and Funnel Sans (Google Fonts).
+- `/v5/` V5: V1 layout set in Bricolage Grotesque (Google Fonts).
 
 All versions share `img/`. A switcher in the corner jumps between them.

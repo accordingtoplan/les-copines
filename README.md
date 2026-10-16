@@ -23,5 +23,6 @@ Changes go live a minute after they are pushed to `main` (GitHub Pages).
 
 - `/v4/` V4: V1 layout set in Funnel Display and Funnel Sans (Google Fonts).
 - `/v5/` V5: V1 layout set in Bricolage Grotesque (Google Fonts).
+- `/v6/` V6: V3 layout set in Funnel Display and Funnel Sans. V3 itself is now in Bricolage Grotesque.
 
 All versions share `img/`. A switcher in the corner jumps between them.

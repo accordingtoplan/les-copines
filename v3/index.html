@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Les Copines</title>
+<meta name="description" content="Les Copines. PR and creator relations for hotels, restaurants and brands. Berlin.">
+<style>
+:root{
+  --ink:#141412;
+  --paper:#ebe9e2;
+  --tile:#dedbd2;
+  --line:rgba(20,20,18,.18);
+  --g:6px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--paper);color:var(--ink);font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:13px;line-height:1.35;-webkit-font-smoothing:antialiased;overflow-x:hidden;padding:var(--g) var(--g) 64px}
+img{display:block;width:100%;height:100%;object-fit:cover}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+
+/* floating panel nav */
+.panel{position:fixed;top:var(--g);left:var(--g);z-index:60;width:min(420px,calc(100vw - 12px));display:grid;grid-template-columns:1fr 1fr;background:rgba(235,233,226,.88);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line)}
+.panel > *{padding:10px 12px;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+.panel > :nth-child(2n){border-right:0}
+.panel > :nth-last-child(-n+2){border-bottom:0}
+.panel .mark{font-weight:900;font-size:17px;letter-spacing:-.04em;display:flex;justify-content:space-between;align-items:baseline}
+.panel .mark small{font-weight:400;font-size:12px;letter-spacing:0}
+.panel .links{display:grid;gap:2px}
+.panel .links a:hover,.panel a.cta:hover{text-decoration:underline}
+.panel .cta{display:flex;align-items:center;justify-content:center}
+.chips{display:flex;flex-wrap:wrap;gap:4px;grid-column:1/-1}
+.chip{padding:4px 10px;border:1px solid var(--line);border-radius:999px;font-size:12px}
+.chip.on{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+
+/* hero tile */
+.top{display:grid;grid-template-columns:repeat(6,1fr);gap:var(--g);margin-bottom:var(--g)}
+.hero{grid-column:1/-1;position:relative;height:calc(100svh - 12px);min-height:520px;overflow:hidden;background:#222}
+.hero img{position:absolute;inset:0;transition:opacity 1.2s}
+.hero img:not(.on){opacity:0}
+.hero h1{position:absolute;right:16px;bottom:58px;color:#fff;font-weight:900;font-size:clamp(56px,13vw,220px);letter-spacing:-.06em;line-height:.8;text-align:right}
+.hero .cap{position:absolute;left:16px;bottom:58px;color:#fff}
+
+/* bento grid */
+.grid{display:grid;grid-template-columns:repeat(6,1fr);grid-auto-rows:calc((100vw - 7 * var(--g)) / 6 * 1.25);grid-auto-flow:dense;gap:var(--g)}
+.t{position:relative;overflow:hidden;background:var(--tile);cursor:pointer}
+.t.l{grid-column:span 2;grid-row:span 2}
+.t.w{grid-column:span 3;grid-row:span 2}
+.t img{transition:transform 1.2s cubic-bezier(.2,.7,.2,1)}
+.t:hover img{transform:scale(1.04)}
+.t .cap{position:absolute;left:10px;top:9px;color:#fff;text-shadow:0 0 12px rgba(0,0,0,.25);z-index:2}
+.t .tag{position:absolute;left:8px;bottom:8px;z-index:2;background:var(--paper);padding:4px 9px;font-size:12px;display:flex;gap:8px}
+.t.text{background:var(--tile);cursor:default;padding:14px;display:flex;flex-direction:column;justify-content:space-between;grid-column:span 2}
+.t.text p{font-size:clamp(18px,1.7vw,26px);letter-spacing:-.02em;line-height:1.12}
+.t.hide{display:none}
+
+/* list mode */
+.list{display:none;border-top:1px solid var(--line)}
+.list.on{display:block}
+.list a{display:grid;grid-template-columns:3fr 2fr 1fr 60px;gap:12px;align-items:baseline;padding:12px 4px;border-bottom:1px solid var(--line);cursor:pointer}
+.list a b{font-size:clamp(24px,3.4vw,48px);font-weight:900;letter-spacing:-.045em;line-height:1}
+.list a:hover{background:var(--tile)}
+.float{position:fixed;width:220px;aspect-ratio:4/5;pointer-events:none;z-index:70;opacity:0;transition:opacity .2s;transform:translate(16px,-50%)}
+.float.on{opacity:1}
+.grid.off{display:none}
+
+/* accordion rows */
+.section{display:grid;grid-template-columns:2fr 4fr;gap:var(--g);margin-top:80px}
+.section h2{font-weight:900;font-size:clamp(32px,4vw,60px);letter-spacing:-.05em;line-height:.9}
+.acc{display:grid;gap:4px}
+.acc details{background:var(--tile)}
+.acc summary{list-style:none;display:flex;justify-content:space-between;padding:10px 12px;cursor:pointer}
+.acc summary::-webkit-details-marker{display:none}
+.acc summary::after{content:"+";font-size:16px;line-height:1}
+.acc details[open] summary::after{content:"−"}
+.acc details p{padding:0 12px 14px;max-width:56ch;opacity:.8}
+
+/* sticky bottom bar */
+.bottom{position:fixed;left:var(--g);right:var(--g);bottom:var(--g);z-index:60;display:grid;grid-template-columns:auto 1fr auto;gap:var(--g)}
+.bottom > *{background:var(--ink);color:var(--paper);height:38px;display:flex;align-items:center;padding:0 14px}
+.bottom .mode{gap:14px;padding:0 12px;background:var(--paper);color:var(--ink);border:1px solid var(--line)}
+.bottom .mode button.on{text-decoration:underline}
+.bottom .cta{justify-content:space-between}
+.bottom .cta:hover{background:#000}
+
+.foot{display:flex;justify-content:space-between;margin-top:80px;padding:14px 4px;border-top:1px solid var(--line);opacity:.6}
+
+/* case drawer */
+.scrim{position:fixed;inset:0;z-index:80;background:rgba(20,20,18,.35);opacity:0;pointer-events:none;transition:opacity .4s}
+.scrim.on{opacity:1;pointer-events:auto;cursor:pointer}
+.drawer{position:fixed;top:var(--g);right:var(--g);bottom:var(--g);width:min(760px,calc(100vw - 12px));z-index:81;background:var(--paper);transform:translateX(105%);transition:transform .6s cubic-bezier(.7,0,.2,1);overflow-y:auto;overscroll-behavior:contain}
+.drawer.on{transform:none}
+.dh{padding:16px 14px 20px;display:grid;gap:12px}
+.dh .k{opacity:.6}
+.dh h2{font-weight:900;font-size:clamp(40px,6vw,84px);letter-spacing:-.06em;line-height:.85}
+.dimgs{display:grid;grid-template-columns:1fr 1fr;gap:var(--g);padding:0 var(--g)}
+.dimgs div{aspect-ratio:4/5;overflow:hidden}
+.dimgs div:first-child{grid-column:1/-1;aspect-ratio:auto;height:min(70svh,640px)}
+.drawer .acc{padding:var(--g)}
+.drawer .next{display:block;margin:var(--g);padding:14px;background:var(--ink);color:var(--paper);cursor:pointer}
+
+.vs{position:fixed;right:var(--g);top:var(--g);z-index:65;display:flex;border:1px solid var(--line);background:rgba(235,233,226,.88);backdrop-filter:blur(14px)}
+.vs a{padding:6px 10px}
+.vs a.on{background:var(--ink);color:var(--paper)}
+
+@media (max-width:800px){
+  .grid{grid-template-columns:repeat(2,1fr);grid-auto-rows:calc((100vw - 3 * var(--g)) / 2 * 1.25)}
+  .t.l,.t.w{grid-column:span 2;grid-row:span 2}
+  .t.text{grid-column:span 2}
+  .section{grid-template-columns:1fr}
+  .list a{grid-template-columns:1fr auto}
+  .list a span:nth-child(2),.list a span:nth-child(4){display:none}
+  .bottom{grid-template-columns:auto 1fr}
+  .bottom .who{display:none}
+  .float{display:none}
+}
+</style>
+</head>
+<body>
+
+<div class="panel">
+  <a href="#" class="mark">LES COPINES <small id="n"></small></a>
+  <a href="mailto:hello@lescopines.de" class="cta">Start a project</a>
+  <nav class="links"><a href="#work">Work</a><a href="#services">Services</a><a href="#about">About</a></nav>
+  <div class="links"><span>PR and creator relations</span><span style="opacity:.6">Berlin, Ibiza, Mecklenburg</span></div>
+  <div class="chips" id="chips"></div>
+</div>
+
+<nav class="vs" aria-label="Versions"><a href="../">V1</a><a href="../v2/">V2</a><a href="./" class="on">V3</a></nav>
+
+<section class="top">
+  <div class="hero">
+    <img src="../img/parkamsee-5.jpg" alt="" class="on"><img src="../img/nomade-3.jpg" alt=""><img src="../img/rw-8.jpg" alt=""><img src="../img/retreat-9.jpg" alt="">
+    <span class="cap" id="herocap">Park am See, Mecklenburg</span>
+    <h1>Les<br>Copines</h1>
+  </div>
+</section>
+
+<section id="work">
+  <div class="grid" id="grid"></div>
+  <div class="list" id="list"></div>
+</section>
+<div class="float" id="float"><img alt=""></div>
+
+<section class="section" id="services">
+  <h2>Services</h2>
+  <div class="acc">
+    <details open><summary>Public relations</summary><p>Press strategy, releases and pitching to travel, food and lifestyle desks in Germany and beyond.</p></details>
+    <details><summary>Creator relations</summary><p>Hand-picked creators and journalists, invited to stay, eat and write. No mass seeding.</p></details>
+    <details><summary>Press dinners and openings</summary><p>Previews, launches and dinners. Guest lists built one name at a time.</p></details>
+    <details><summary>Social media</summary><p>Instagram planning and captions in German and English.</p></details>
+  </div>
+</section>
+
+<section class="section" id="about">
+  <h2>French for the girlfriends.</h2>
+  <div class="acc">
+    <details open><summary>Les Copines</summary><p>A small agency in Kreuzberg, run on friendship and a long address book. Every place on the list is one to recommend to a friend first, and to the press second.</p></details>
+    <details><summary>Written about by</summary><p>Tina Hüttl, Susanna Maria Pommer, Munchies with Sophie and others.</p></details>
+    <details><summary>Studio</summary><p>Les Copines GbR, Ritterstraße 12–14, 10969 Berlin. Deutsch, English, Français.</p></details>
+  </div>
+</section>
+
+<footer class="foot"><span>Les Copines, 2026</span><span><a href="https://www.instagram.com/lescopines.agency/" target="_blank" rel="noopener">Instagram</a>, <a href="#">Imprint</a>, <a href="#">Privacy</a></span></footer>
+
+<div class="bottom">
+  <div class="mode"><button id="mgrid" class="on">Grid</button><button id="mlist">List</button></div>
+  <a class="cta" href="mailto:hello@lescopines.de"><span>Start a project</span><span>hello@lescopines.de</span></a>
+  <div class="who">Berlin</div>
+</div>
+
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer"></aside>
+
+<script>
+const CASES = [
+  {id:"nomade", name:"Nômade Temple", place:"Ibiza", year:"2026", type:"Hotels", sector:"Hotel and wellbeing resort", scope:"PR, creator relations",
+   lede:"White houses, pine trees, a pool in the shade of the hills.",
+   body:"Nômade Temple opened on Ibiza this season. Les Copines handles press and creator relations for the house, from the first announcement to the last weeks of the season.",
+   tiles:[["nomade-2","w"],["nomade-3",""],["nomade-1",""]], gal:["nomade-2","nomade-3","nomade-1"]},
+  {id:"rw", name:"Restaurant Week", place:"Berlin", year:"2026", type:"Restaurants", sector:"Food festival, second edition", scope:"Press dinner, creator relations",
+   lede:"Around fifty Berlin restaurants. Set menus at 29 or 45 euros.",
+   body:"An easy way into very good restaurants. The second edition opened with a press dinner at Crackers, followed by Zum Heiligen Teufel near Markthalle Neun and others across the city.",
+   tiles:[["rw-7","l"],["rw-1",""],["rw-2",""],["rw-8",""],["rw-4",""]], gal:["rw-1","rw-7","rw-5","rw-2","rw-3","rw-4","rw-6","rw-8","rw-10","rw-11"]},
+  {id:"parkamsee", name:"Park am See", place:"Mecklenburg", year:"2026", type:"Wellbeing", sector:"Nattika Ayurveda resort", scope:"PR, winter campaign",
+   lede:"Ninety minutes from Berlin. Kerala's healing tradition on a lake in Mecklenburg.",
+   body:"Indian doctors, authentic Panchakarma and a kitchen that makes healthy food a pleasure. A winter campaign with cure specials for January and February.",
+   tiles:[["parkamsee-1",""],["parkamsee-5","w"],["parkamsee-2",""]], gal:["parkamsee-5","parkamsee-1","parkamsee-2","parkamsee-3","parkamsee-6","parkamsee-4"]},
+  {id:"retreat", name:"Ayurveda Day Retreat", place:"Berlin", year:"2026", type:"Events", sector:"Nattika Ayurveda and Neue Wege Reisen", scope:"Event, PR, guest list",
+   lede:"Yoga, Ayurveda and the people who practise it. One day in a Berlin courtyard.",
+   body:"Doctors and therapists from Nattika, the team from Neue Wege Reisen, and a table of guests. Treatments in the morning, a long lunch in the courtyard.",
+   tiles:[["retreat-8","l"],["retreat-9",""],["retreat-3",""],["retreat-7",""],["retreat-2",""]], gal:["retreat-7","retreat-1","retreat-2","retreat-3","retreat-4","retreat-5","retreat-6","retreat-8","retreat-9","retreat-10","retreat-11"]},
+  {id:"root", name:"ROOT Bistro", place:"Berlin-Mitte", year:"2025", type:"Restaurants", sector:"Restaurant, Hotel Telegraphenamt", scope:"PR, social media",
+   lede:"Japanese precision and European cooking, inside the old Telegraphenamt.",
+   body:"Signature sushi by chef Ryota and a lunch menu that changes every week. Photography by Steffen Sinzinger.",
+   tiles:[["root-3","w"],["root-2",""],["root-4",""]], gal:["root-3","root-2","root-1","root-4"]},
+  {id:"heritage", name:"Heritage", place:"Berlin", year:"2026", type:"Restaurants", sector:"Restaurant, Hotel Luc", scope:"Creator relations",
+   lede:"Fish, meat and a signature aubergine with soft tofu.",
+   body:"Creator visits for the restaurant inside Hotel Luc. Sea bass with beurre blanc, and one of the better hotel kitchens in the city.",
+   tiles:[["heritage-2",""],["heritage-4",""],["heritage-3",""]], gal:["heritage-2","heritage-1","heritage-3","heritage-4"]}
+];
+const img = k => `../img/${k}.jpg`;
+const TYPES = ["All","Hotels","Restaurants","Wellbeing","Events"];
+document.getElementById('n').textContent = '('+String(CASES.length).padStart(2,'0')+')';
+
+// grid: case tiles with a text tile woven in after the first case
+const texts = [
+  `<div class="t text" data-type="All"><p>Hotels, restaurants and brands with heart. Introduced to the right people, at the right table.</p><span style="opacity:.6">Les Copines, Berlin</span></div>`,
+  `<div class="t text" data-type="All"><p>Small client list. Long relationships. Every introduction made in person.</p><a href="#services" style="text-decoration:underline">Services</a></div>`
+];
+const grid = document.getElementById('grid');
+grid.innerHTML = CASES.map((c,i)=> c.tiles.map(([k,s],j)=>`
+  <div class="t ${s}" data-id="${c.id}" data-type="${c.type}">
+    <img src="${img(k)}" alt="${c.name}" loading="lazy">
+    ${j===0?`<span class="cap">${c.place}, ${c.year}</span><span class="tag">${c.name} <span>+</span></span>`:''}
+  </div>`).join('') + (i===0?texts[0]:i===3?texts[1]:'')).join('');
+
+// list
+const list = document.getElementById('list');
+list.innerHTML = CASES.map(c=>`<a data-id="${c.id}" data-img="${img(c.gal[0])}" data-type="${c.type}"><b>${c.name}</b><span>${c.sector}</span><span>${c.place}</span><span>${c.year}</span></a>`).join('');
+
+// filters
+const chips = document.getElementById('chips'); let filter='All';
+chips.innerHTML = TYPES.map(t=>`<button class="chip${t==='All'?' on':''}" data-f="${t}">${t}</button>`).join('');
+chips.onclick = e=>{
+  const b=e.target.closest('[data-f]'); if(!b) return;
+  filter=b.dataset.f; chips.querySelectorAll('.chip').forEach(x=>x.classList.toggle('on',x===b));
+  document.querySelectorAll('#grid .t, #list a').forEach(el=>{
+    const ok = filter==='All' || el.dataset.type===filter;
+    el.classList.toggle('hide', !ok); if(el.tagName==='A') el.style.display = ok?'':'none';
+  });
+  document.getElementById('work').scrollIntoView({behavior:'smooth'});
+};
+
+// grid / list toggle
+const mg=document.getElementById('mgrid'), ml=document.getElementById('mlist');
+mg.onclick=()=>{ grid.classList.remove('off'); list.classList.remove('on'); mg.classList.add('on'); ml.classList.remove('on'); };
+ml.onclick=()=>{ grid.classList.add('off'); list.classList.add('on'); ml.classList.add('on'); mg.classList.remove('on'); document.getElementById('work').scrollIntoView({behavior:'smooth'}); };
+
+// hover preview in list
+const fl=document.getElementById('float'), fli=fl.querySelector('img');
+list.addEventListener('mousemove',e=>{ const a=e.target.closest('a'); if(!a){ fl.classList.remove('on'); return; } fli.src=a.dataset.img; fl.style.left=e.clientX+'px'; fl.style.top=e.clientY+'px'; fl.classList.add('on'); });
+list.addEventListener('mouseleave',()=>fl.classList.remove('on'));
+
+// drawer
+const dr=document.getElementById('drawer'), sc=document.getElementById('scrim'); let pushed=false;
+function openCase(id,push=true){
+  const i=CASES.findIndex(c=>c.id===id); if(i<0) return;
+  const c=CASES[i], n=CASES[(i+1)%CASES.length];
+  dr.innerHTML=`
+    <div class="dh"><span class="k">${c.type}, ${c.place}, ${c.year}</span><h2>${c.name}</h2></div>
+    <div class="dimgs">${c.gal.map(k=>`<div><img src="${img(k)}" alt="${c.name}" loading="lazy"></div>`).join('')}</div>
+    <div class="acc">
+      <details open><summary>The brief</summary><p>${c.lede} ${c.body}</p></details>
+      <details><summary>Client</summary><p>${c.sector}</p></details>
+      <details><summary>Scope</summary><p>${c.scope}</p></details>
+    </div>
+    <a class="next" data-id="${n.id}">Next project: ${n.name}</a>`;
+  dr.classList.add('on'); sc.classList.add('on'); dr.scrollTop=0; document.body.style.overflow='hidden';
+  if(push){ history.pushState({case:id},'','#case-'+id); pushed=true; }
+}
+function closeCase(){ dr.classList.remove('on'); sc.classList.remove('on'); document.body.style.overflow=''; }
+function leave(){ if(pushed){ pushed=false; history.back(); } else { closeCase(); history.replaceState(null,'',location.pathname); } }
+document.addEventListener('click',e=>{ const t=e.target.closest('[data-id]'); if(t){ e.preventDefault(); openCase(t.dataset.id, !dr.classList.contains('on')); } });
+sc.onclick=leave;
+document.addEventListener('keydown',e=>{ if(e.key==='Escape' && dr.classList.contains('on')) leave(); });
+addEventListener('popstate',()=>{ location.hash.startsWith('#case-') ? openCase(location.hash.slice(6),false) : closeCase(); });
+if(location.hash.startsWith('#case-')) openCase(location.hash.slice(6),false);
+
+// hero crossfade with caption
+const caps=["Park am See, Mecklenburg","Nômade Temple, Ibiza","Zum Heiligen Teufel, Restaurant Week","Ayurveda Day Retreat, Berlin"];
+const hs=[...document.querySelectorAll('.hero img')]; let h=0;
+setInterval(()=>{ hs[h].classList.remove('on'); h=(h+1)%hs.length; hs[h].classList.add('on'); document.getElementById('herocap').textContent=caps[h]; },5000);
+</script>
+</body>
+</html>

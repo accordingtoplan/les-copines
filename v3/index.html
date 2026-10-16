@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Les Copines</title>
 <meta name="description" content="Les Copines. PR and creator relations for hotels, restaurants and brands. Berlin.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,800&display=swap" rel="stylesheet">
 <style>
 :root{
   --ink:#141412;
@@ -14,7 +17,7 @@
   --g:6px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--paper);color:var(--ink);font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:13px;line-height:1.35;-webkit-font-smoothing:antialiased;overflow-x:hidden;padding:var(--g) var(--g) 64px}
+body{background:var(--paper);color:var(--ink);font-family:"Bricolage Grotesque","Helvetica Neue",Helvetica,Arial,sans-serif;font-optical-sizing:auto;font-size:13px;line-height:1.35;-webkit-font-smoothing:antialiased;overflow-x:hidden;padding:var(--g) var(--g) 64px}
 img{display:block;width:100%;height:100%;object-fit:cover}
 a{color:inherit;text-decoration:none}
 button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
@@ -24,7 +27,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .panel > *{padding:10px 12px;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
 .panel > :nth-child(2n){border-right:0}
 .panel > :nth-last-child(-n+2){border-bottom:0}
-.panel .mark{font-weight:900;font-size:17px;letter-spacing:-.04em;display:flex;justify-content:space-between;align-items:baseline}
+.panel .mark{font-weight:800;font-size:17px;letter-spacing:-.04em;display:flex;justify-content:space-between;align-items:baseline}
 .panel .mark small{font-weight:400;font-size:12px;letter-spacing:0}
 .panel .links{display:grid;gap:2px}
 .panel .links a:hover,.panel a.cta:hover{text-decoration:underline}
@@ -38,7 +41,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .hero{grid-column:1/-1;position:relative;height:calc(100svh - 12px);min-height:520px;overflow:hidden;background:#222}
 .hero img{position:absolute;inset:0;transition:opacity 1.2s}
 .hero img:not(.on){opacity:0}
-.hero h1{position:absolute;right:16px;bottom:58px;color:#fff;font-weight:900;font-size:clamp(56px,13vw,220px);letter-spacing:-.06em;line-height:.8;text-align:right}
+.hero h1{position:absolute;right:16px;bottom:58px;color:#fff;font-weight:800;font-size:clamp(56px,13vw,220px);letter-spacing:-.06em;line-height:.8;text-align:right}
 .hero .cap{position:absolute;left:16px;bottom:58px;color:#fff}
 
 /* bento grid */
@@ -58,7 +61,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .list{display:none;border-top:1px solid var(--line)}
 .list.on{display:block}
 .list a{display:grid;grid-template-columns:3fr 2fr 1fr 60px;gap:12px;align-items:baseline;padding:12px 4px;border-bottom:1px solid var(--line);cursor:pointer}
-.list a b{font-size:clamp(24px,3.4vw,48px);font-weight:900;letter-spacing:-.045em;line-height:1}
+.list a b{font-size:clamp(24px,3.4vw,48px);font-weight:800;letter-spacing:-.045em;line-height:1}
 .list a:hover{background:var(--tile)}
 .float{position:fixed;width:220px;aspect-ratio:4/5;pointer-events:none;z-index:70;opacity:0;transition:opacity .2s;transform:translate(16px,-50%)}
 .float.on{opacity:1}
@@ -66,7 +69,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 
 /* accordion rows */
 .section{display:grid;grid-template-columns:2fr 4fr;gap:var(--g);margin-top:80px}
-.section h2{font-weight:900;font-size:clamp(32px,4vw,60px);letter-spacing:-.05em;line-height:.9}
+.section h2{font-weight:800;font-size:clamp(32px,4vw,60px);letter-spacing:-.05em;line-height:.9}
 .acc{display:grid;gap:4px}
 .acc details{background:var(--tile)}
 .acc summary{list-style:none;display:flex;justify-content:space-between;padding:10px 12px;cursor:pointer}
@@ -92,7 +95,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .drawer.on{transform:none}
 .dh{padding:16px 14px 20px;display:grid;gap:12px}
 .dh .k{opacity:.6}
-.dh h2{font-weight:900;font-size:clamp(40px,6vw,84px);letter-spacing:-.06em;line-height:.85}
+.dh h2{font-weight:800;font-size:clamp(40px,6vw,84px);letter-spacing:-.06em;line-height:.85}
 .dimgs{display:grid;grid-template-columns:1fr 1fr;gap:var(--g);padding:0 var(--g)}
 .dimgs div{aspect-ratio:4/5;overflow:hidden}
 .dimgs div:first-child{grid-column:1/-1;aspect-ratio:auto;height:min(70svh,640px)}

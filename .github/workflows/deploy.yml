@@ -1,5 +1,6 @@
 # Uploads the site to lescopines.de (HostEurope, FTPS) on every push to main.
-# Needs repo secrets FTP_SERVER, FTP_USERNAME, FTP_PASSWORD.
+# Needs repo secrets FTP_SERVER, FTP_USERNAME, FTP_PASSWORD; without them
+# the run skips the upload and passes.
 # Only changed files go up; the action keeps its state in
 # .ftp-deploy-sync-state.json on the server. V2 and the redirects stay off.
 name: Deploy to lescopines.de
@@ -15,8 +16,16 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+      - id: check
+        env:
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+        run: |
+          if [ -n "$FTP_PASSWORD" ]; then echo "connected=true" >> "$GITHUB_OUTPUT"
+          else echo "No HostEurope secrets yet, skipping upload."; fi
+      - if: steps.check.outputs.connected == 'true'
+        uses: actions/checkout@v4
+      - if: steps.check.outputs.connected == 'true'
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}

@@ -24,6 +24,9 @@ jobs:
           else echo "No HostEurope secrets yet, skipping upload."; fi
       - if: steps.check.outputs.connected == 'true'
         uses: actions/checkout@v4
+      # lescopines.de is V1 only: drop the V1/V2 switcher so nothing links to v2/
+      - if: steps.check.outputs.connected == 'true'
+        run: perl -0pi -e 's|<nav class="vs"[^>]*>.*?</nav>\n?||s' index.html && ! grep -q 'class="vs"' index.html
       - if: steps.check.outputs.connected == 'true'
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:

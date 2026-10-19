@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://lescopines.de/sitemap.xml
+Sitemap: http://lescopines.de/sitemap.xml

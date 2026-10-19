@@ -13,12 +13,12 @@ Les Copines is a PR and creator relations agency in Kreuzberg, Berlin. The name 
 
 ## Selected work
 
-- [Nômade Temple](https://lescopines.de/#case-nomade): hotel and wellbeing resort, Ibiza, 2026
-- [Park am See](https://lescopines.de/#case-parkamsee): Nattika Ayurveda resort, Mecklenburg, 2026
-- [Ayurveda Day Retreat](https://lescopines.de/#case-retreat): Nattika Ayurveda and Neue Wege Reisen, Berlin, 2026
-- [Restaurant Week](https://lescopines.de/#case-rw): food festival, second edition, Berlin, 2026
-- [ROOT Bistro](https://lescopines.de/#case-root): restaurant in Hotel Telegraphenamt, Berlin-Mitte, 2025
-- [Heritage](https://lescopines.de/#case-heritage): restaurant in Hotel Luc, Berlin, 2026
+- [Nômade Temple](http://lescopines.de/#case-nomade): hotel and wellbeing resort, Ibiza, 2026
+- [Park am See](http://lescopines.de/#case-parkamsee): Nattika Ayurveda resort, Mecklenburg, 2026
+- [Ayurveda Day Retreat](http://lescopines.de/#case-retreat): Nattika Ayurveda and Neue Wege Reisen, Berlin, 2026
+- [Restaurant Week](http://lescopines.de/#case-rw): food festival, second edition, Berlin, 2026
+- [ROOT Bistro](http://lescopines.de/#case-root): restaurant in Hotel Telegraphenamt, Berlin-Mitte, 2025
+- [Heritage](http://lescopines.de/#case-heritage): restaurant in Hotel Luc, Berlin, 2026
 - [Instagram](https://www.instagram.com/lescopines.agency/): more work
 
 ## Languages
@@ -31,4 +31,4 @@ German, English, French.
 - Studio: Ritterstraße 12–14, 10969 Berlin, Germany
 - Company: Les Copines GbR
 - [Instagram](https://www.instagram.com/lescopines.agency/)
-- [Imprint and privacy](https://lescopines.de/imprint.html)
+- [Imprint and privacy](http://lescopines.de/imprint.html)

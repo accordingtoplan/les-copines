@@ -14,7 +14,7 @@ Static, no build step.
 
 - `index.html`: the live site (V1, editorial rows, Helvetica Neue). Case studies live in the `const CASES = [...]` array near the bottom. Services, about, coverage and contact are plain HTML above it.
 - `img/`: every photo, shared by both layouts. `img/480/` and `img/960/` hold smaller copies for phones and small tiles, made by `tools/img-sizes.py`. Never edit them by hand.
-- `.htaccess` (security headers, 404 page, caching, hides the 2017 files), `404.html`, `robots.txt`, `sitemap.xml`, `llms.txt`, `og-image.jpg`, favicons: site plumbing, deployed with the rest. Canonical URLs use https://lescopines.de/.
+- `.htaccess` (security headers, 404 page, caching, hides the 2017 files), `404.html`, `robots.txt`, `sitemap.xml`, `llms.txt`, `og-image.jpg`, favicons: site plumbing, deployed with the rest. Absolute URLs (canonical, Open Graph, JSON-LD, robots, sitemap, llms.txt) use http://lescopines.de/ until Cloudflare HTTPS is live, then all go back to https.
 - `v2/index.html`: an alternative layout still in review (bento grid, Funnel fonts), not on lescopines.de. It has its own `CASES` array with extra fields (`tiles`, `type`).
 - `v5/`, `v6/`: redirects, leave alone.
 

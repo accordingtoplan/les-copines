@@ -1,8 +1,9 @@
 # Uploads the site to lescopines.de (HostEurope, FTPS) on every push to main.
 # Needs repo secrets FTP_SERVER, FTP_USERNAME, FTP_PASSWORD; without them
 # the run skips the upload and passes.
-# Only changed files go up; the action keeps its state in
-# .ftp-deploy-sync-state.json on the server. V2 and the redirects stay off.
+# Uses lftp: HostEurope requires TLS session reuse on FTPS data connections,
+# which the FTP-Deploy-Action library drops (ECONNRESET). Adds and overwrites
+# files, deletes nothing. V2 and the redirects stay off.
 name: Deploy to lescopines.de
 
 on:
@@ -24,24 +25,27 @@ jobs:
           else echo "No HostEurope secrets yet, skipping upload."; fi
       - if: steps.check.outputs.connected == 'true'
         uses: actions/checkout@v4
-      # lescopines.de is V1 only: drop the V1/V2 switcher so nothing links to v2/
+      # lescopines.de is V1 only: no v2/v5/v6, and no V1/V2 switcher linking to v2/
       - if: steps.check.outputs.connected == 'true'
-        run: perl -0pi -e 's|<nav class="vs"[^>]*>.*?</nav>\n?||s' index.html && ! grep -q 'class="vs"' index.html
+        run: |
+          mkdir -p "$RUNNER_TEMP/stage"
+          rsync -a --exclude .git --exclude .github --exclude .gitignore \
+            --exclude README.md --exclude CLAUDE.md --exclude v2 --exclude v5 --exclude v6 \
+            ./ "$RUNNER_TEMP/stage/"
+          perl -0pi -e 's|<nav class="vs"[^>]*>.*?</nav>\n?||s' "$RUNNER_TEMP/stage/index.html"
+          ! grep -q 'class="vs"' "$RUNNER_TEMP/stage/index.html"
+          ls -la "$RUNNER_TEMP/stage"
       - if: steps.check.outputs.connected == 'true'
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          protocol: ftps
-          port: 21
-          server-dir: ./
-          exclude: |
-            **/.git*
-            **/.git*/**
-            .github/**
-            README.md
-            CLAUDE.md
-            v2/**
-            v5/**
-            v6/**
+        env:
+          FTP_SERVER: ${{ secrets.FTP_SERVER }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          LFTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq lftp >/dev/null
+          lftp -e "
+          set ftp:ssl-force true; set ftp:ssl-protect-data true; set ssl:verify-certificate true;
+          set ftp:passive-mode true; set net:max-retries 3; set net:timeout 30;
+          open --env-password -u '$FTP_USERNAME' '$FTP_SERVER';
+          mirror -R --verbose --no-perms --parallel=4 '$RUNNER_TEMP/stage' /;
+          cls -l /;
+          bye"

@@ -13,7 +13,7 @@ Website of Les Copines GbR, a PR and creator relations agency in Berlin (Ritters
 Static, no build step.
 
 - `index.html`: the live site (V1, editorial rows, Helvetica Neue). Case studies live in the `const CASES = [...]` array near the bottom. Services, about, coverage and contact are plain HTML above it.
-- `img/`: every photo, shared by both layouts.
+- `img/`: every photo, shared by both layouts. `img/480/` and `img/960/` hold smaller copies for phones and small tiles, made by `tools/img-sizes.py`. Never edit them by hand.
 - `.htaccess` (security headers, 404 page, caching, hides the 2017 files), `404.html`, `robots.txt`, `sitemap.xml`, `llms.txt`, `og-image.jpg`, favicons: site plumbing, deployed with the rest. Canonical URLs use https://lescopines.de/.
 - `v2/index.html`: an alternative layout still in review (bento grid, Funnel fonts), not on lescopines.de. It has its own `CASES` array with extra fields (`tiles`, `type`).
 - `v5/`, `v6/`: redirects, leave alone.
@@ -37,6 +37,7 @@ Sandra updates copy and images herself through Claude Code on the web. She is no
 
 **Images**
 - Save photos to `img/` as JPG, long edge 1600px (`sips -s format jpeg -Z 1600` or equivalent, which also handles HEIC), named after the case id: `nomade-4.jpg`. A new case gets a short lowercase id (`seeblick`) and files `seeblick-1.jpg`, `seeblick-2.jpg`. Never overwrite another case's file unless asked to replace it.
+- After adding or replacing a photo, run `python3 tools/img-sizes.py` (needs Pillow: `pip install pillow`) and commit the new files in `img/480/` and `img/960/` too. The deploy makes missing ones as a safety net, but the preview needs them.
 - `row` lists the two or three photos shown on the work list, `gal` the full gallery in order. The photo Sandra names as the lead goes first in both.
 - Photos shot by creators or journalists need their OK; ask Sandra before adding one. No recognisable people without their agreement, no children.
 - Add photographer credits to the case `body` when Sandra gives them.

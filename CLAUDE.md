@@ -28,7 +28,7 @@ Static, no build step.
 Sandra updates copy and images herself through Claude Code on the web. She is not technical. Treat any session as a content session unless the person says they are Frederik. In a content session:
 
 **Scope**
-- Edit copy and images only: cases (`name`, `place`, `year`, `sector`, `scope`, `lede`, `body`, photos, order), services, about text, coverage, contact details, imprint and privacy text. Files touched: `index.html`, `img/`, and the "Open items" section of this file. Mirror case changes into `v2/index.html` too, copying the shape of an existing V2 case exactly, so V2 stays current while it is in review.
+- Edit copy and images only (plus `imprint.html` for imprint and privacy text): cases (`name`, `place`, `year`, `sector`, `scope`, `lede`, `body`, photos, order), services, about text, coverage, contact details, imprint and privacy text. Files touched: `index.html`, `img/`, and the "Open items" section of this file. Mirror case changes into `v2/index.html` too, copying the shape of an existing V2 case exactly, so V2 stays current while it is in review.
 - Do not touch `<style>`, the `<head>`, the nav, the version switcher, class names, the script below the `CASES` array, `.github/`, `v5/`, `v6/`. A design or layout request goes to Frederik: say so and stop.
 
 **Facts**
@@ -48,8 +48,7 @@ Sandra updates copy and images herself through Claude Code on the web. She is no
 
 ## Open items, all need Sandra
 
-- Contact email (`hello@lescopines.de` is a placeholder)
-- Imprint and privacy text (footer links point to `#`)
+- `imprint.html`: names only Sandra Haller as partner. A GbR has at least two, so add the other partner(s). Add a VAT ID if one exists (the tax number stays off). Add the Cloudflare paragraph (commented out in the file) once Cloudflare is live.
 - Real scope per client; current scope tags are guesses
 - Agency of record for Restaurant Week Berlin and Heritage / Hotel Luc
 - Original photos; current ones are Instagram copies, 1080 to 1440px

@@ -1,0 +1,50 @@
+# lescopines.de on Host Europe (Apache). Deployed with the site from main.
+# Every block is wrapped in <IfModule> so a missing module can't take the site down.
+# HSTS and the http to https redirect are left out on purpose: HTTPS comes with
+# Cloudflare and gets its own change.
+
+ErrorDocument 404 /404.html
+DirectoryIndex index.html
+
+# The 2017 site still sits on the server: hide it until it is deleted.
+<IfModule mod_alias.c>
+  RedirectMatch 404 ^/(css|fonts|js|min)(/.*)?$
+  RedirectMatch 404 ^/(main\.js|style\.css|style\.scss)$
+  # never serve repo or editor files if one slips through
+  RedirectMatch 404 /\.(git|github|DS_Store)
+  RedirectMatch 404 ^/(README|CLAUDE|NOTES|CHECKS)\.md$
+</IfModule>
+
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set X-Frame-Options "DENY"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=(), usb=()"
+  Header always set Cross-Origin-Opener-Policy "same-origin"
+  # Inline <style>, <script> and style="" are part of the site, so they stay allowed.
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'"
+  Header unset X-Powered-By
+</IfModule>
+
+<IfModule mod_mime.c>
+  AddType image/svg+xml .svg
+  AddType image/x-icon .ico
+  AddType text/plain .txt
+  AddType application/xml .xml
+  AddCharset utf-8 .html .txt .xml .svg
+</IfModule>
+
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/css application/javascript application/xml image/svg+xml
+</IfModule>
+
+# Photos keep their names when replaced, so a week, not a year.
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresDefault "access plus 0 seconds"
+  ExpiresByType image/jpeg "access plus 7 days"
+  ExpiresByType image/png "access plus 7 days"
+  ExpiresByType image/svg+xml "access plus 7 days"
+  ExpiresByType image/x-icon "access plus 7 days"
+  ExpiresByType text/html "access plus 0 seconds"
+</IfModule>

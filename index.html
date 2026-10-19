@@ -3,8 +3,61 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Les Copines</title>
-<meta name="description" content="Les Copines. PR and creator relations for hotels, restaurants and brands. Berlin.">
+<title>Les Copines · PR and creator relations, Berlin</title>
+<meta name="description" content="Les Copines is a PR and creator relations agency in Berlin. Press, creators, press dinners and social media for hotels, restaurants and wellbeing brands.">
+<link rel="canonical" href="https://lescopines.de/">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon.ico" sizes="32x32">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Les Copines">
+<meta property="og:locale" content="en_GB">
+<meta property="og:url" content="https://lescopines.de/">
+<meta property="og:title" content="Les Copines · PR and creator relations, Berlin">
+<meta property="og:description" content="Hotels, restaurants and brands with heart. PR and creator relations from Berlin.">
+<meta property="og:image" content="https://lescopines.de/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Nômade Temple on Ibiza, a Les Copines client">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Les Copines · PR and creator relations, Berlin">
+<meta name="twitter:description" content="Hotels, restaurants and brands with heart. PR and creator relations from Berlin.">
+<meta name="twitter:image" content="https://lescopines.de/og-image.jpg">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "ProfessionalService",
+      "@id": "https://lescopines.de/#org",
+      "name": "Les Copines",
+      "legalName": "Les Copines GbR",
+      "description": "PR and creator relations agency in Berlin for hotels, restaurants, health and wellbeing brands.",
+      "url": "https://lescopines.de/",
+      "email": "hello@lescopines.de",
+      "image": "https://lescopines.de/og-image.jpg",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Ritterstraße 12–14",
+        "postalCode": "10969",
+        "addressLocality": "Berlin",
+        "addressCountry": "DE"
+      },
+      "knowsLanguage": ["de", "en", "fr"],
+      "knowsAbout": ["Public relations", "Creator relations", "Press dinners and openings", "Social media"],
+      "sameAs": ["https://www.instagram.com/lescopines.agency/"]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://lescopines.de/#website",
+      "url": "https://lescopines.de/",
+      "name": "Les Copines",
+      "inLanguage": "en",
+      "publisher": {"@id": "https://lescopines.de/#org"}
+    }
+  ]
+}
+</script>
 <style>
 :root{
   --ink:#141412;
@@ -21,6 +74,7 @@ img{display:block;width:100%;height:100%;object-fit:cover}
 a{color:inherit;text-decoration:none}
 button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .dim{opacity:.5}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .wrap{max-width:var(--max);margin:0 auto;padding:0 var(--gutter)}
 .wrap.wide{max-width:none}
 h1,h2,h3,.display{font-weight:500;letter-spacing:-.035em;line-height:.95}
@@ -36,7 +90,7 @@ h1,h2,h3,.display{font-weight:500;letter-spacing:-.035em;line-height:.95}
 .nav .links a{opacity:.62}
 .nav .links a:hover{opacity:1}
 .wordmark{letter-spacing:.32em;font-size:14px}
-.nav .m{display:none}
+.nav .m,.ov-bar .m{display:none}
 
 /* hero */
 .hero{position:relative;height:100svh;min-height:560px;display:grid;grid-template-columns:repeat(3,1fr);background:#111;overflow:hidden}
@@ -95,6 +149,8 @@ h1,h2,h3,.display{font-weight:500;letter-spacing:-.035em;line-height:.95}
 .meta{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gutter);margin-top:clamp(56px,8vw,110px);line-height:1.45}
 .meta span{opacity:.5}
 .foot{display:flex;justify-content:space-between;margin-top:72px;font-size:12px;opacity:.5}
+/* bigger tap area without moving the layout */
+.nav a,.ov-bar a,.meta a,.foot a{padding:10px 0}
 
 /* case overlay */
 .ov{position:fixed;inset:0;z-index:80;background:var(--paper);transform:translateY(100%);transition:transform .7s cubic-bezier(.7,0,.2,1);overflow-y:auto;overscroll-behavior:contain}
@@ -116,7 +172,7 @@ h1,h2,h3,.display{font-weight:500;letter-spacing:-.035em;line-height:.95}
 
 @media (max-width:800px){
   .nav .links{display:none}
-  .nav .m{display:block}
+  .nav .m,.ov-bar .m{display:block}
   .hero{grid-template-columns:1fr}
   .hero .col:not(:first-child){display:none}
   .hero-copy .wrap{flex-direction:column;align-items:flex-start}
@@ -147,9 +203,9 @@ h1,h2,h3,.display{font-weight:500;letter-spacing:-.035em;line-height:.95}
 </div></header>
 
 <section class="hero">
-  <div class="col"><img src="img/nomade-2.jpg" alt="" class="on"><img src="img/parkamsee-5.jpg" alt=""><img src="img/rw-8.jpg" alt=""></div>
-  <div class="col"><img src="img/nomade-3.jpg" alt="" class="on"><img src="img/retreat-8.jpg" alt=""><img src="img/root-3.jpg" alt=""></div>
-  <div class="col"><img src="img/parkamsee-1.jpg" alt="" class="on"><img src="img/rw-7.jpg" alt=""><img src="img/retreat-2.jpg" alt=""></div>
+  <div class="col"><img src="img/nomade-2.jpg" alt="Nômade Temple, Ibiza" class="on" fetchpriority="high"><img src="img/parkamsee-5.jpg" alt="Park am See, Mecklenburg" loading="lazy"><img src="img/rw-8.jpg" alt="Restaurant Week, Berlin" loading="lazy"></div>
+  <div class="col"><img src="img/nomade-3.jpg" alt="Nômade Temple, Ibiza" class="on" loading="lazy"><img src="img/retreat-8.jpg" alt="Ayurveda Day Retreat, Berlin" loading="lazy"><img src="img/root-3.jpg" alt="ROOT Bistro, Berlin-Mitte" loading="lazy"></div>
+  <div class="col"><img src="img/parkamsee-1.jpg" alt="Park am See, Mecklenburg" class="on" loading="lazy"><img src="img/rw-7.jpg" alt="Restaurant Week, Berlin" loading="lazy"><img src="img/retreat-2.jpg" alt="Ayurveda Day Retreat, Berlin" loading="lazy"></div>
   <div class="hero-copy"><div class="wrap">
     <div>
       <h1>Hotels, restaurants and brands with heart.</h1>
@@ -167,7 +223,7 @@ h1,h2,h3,.display{font-weight:500;letter-spacing:-.035em;line-height:.95}
   </div>
 </div></section>
 
-<section id="work"><div class="wrap wide" id="cases"></div></section>
+<section id="work"><h2 class="sr">Work</h2><div class="wrap wide" id="cases"></div></section>
 
 <section class="services" id="services"><div class="wrap">
   <h2>Services</h2>
@@ -211,8 +267,8 @@ h1,h2,h3,.display{font-weight:500;letter-spacing:-.035em;line-height:.95}
 
 <nav class="vs" aria-label="Versions"><a href="./" class="on">V1</a><a href="v2/">V2</a></nav>
 
-<div class="ov" id="ov" aria-hidden="true">
-  <div class="ov-bar"><div class="wrap wide"><a href="#" class="wordmark">LES COPINES</a><nav class="links"><a href="#work">Work</a>, <a href="#services">Services</a>, <a href="#about">About</a>, <a href="#contact">Contact</a></nav></div></div>
+<div class="ov" id="ov" aria-hidden="true" inert>
+  <div class="ov-bar"><div class="wrap wide"><a href="#" class="wordmark">LES COPINES</a><nav class="links"><a href="#work">Work</a>, <a href="#services">Services</a>, <a href="#about">About</a>, <a href="#contact">Contact</a></nav><a href="#work" class="m">Close</a></div></div>
   <div id="ovbody"></div>
 </div>
 
@@ -295,11 +351,11 @@ function openCase(id, push=true){
     <div class="ov-text"><div class="wrap"><span></span><div><p class="big">${c.lede}</p><p class="body">${c.body}</p></div></div></div>
     <div class="wrap wide"><div class="gal">${rows(c.gal).map(r=>row(r,c.name,c.gal.length%2?c.gal[c.gal.length-1]:null)).join('')}</div>
     <a class="ov-next" data-id="${n.id}"><span class="dim">Next project</span><b>${n.name}</b></a></div>`;
-  ov.classList.add('open'); ov.setAttribute('aria-hidden','false'); ov.scrollTop=0;
+  ov.classList.add('open'); ov.setAttribute('aria-hidden','false'); ov.inert=false; ov.scrollTop=0;
   document.body.style.overflow='hidden';
   if(push){ history.pushState({case:id},'','#case-'+id); pushed=true; }
 }
-function closeCase(){ ov.classList.remove('open'); ov.setAttribute('aria-hidden','true'); document.body.style.overflow=''; }
+function closeCase(){ ov.classList.remove('open'); ov.setAttribute('aria-hidden','true'); ov.inert=true; document.body.style.overflow=''; }
 document.addEventListener('click',e=>{
   const t=e.target.closest('[data-id]');
   if(t){ e.preventDefault(); openCase(t.dataset.id); return; }

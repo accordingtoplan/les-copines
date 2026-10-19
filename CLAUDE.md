@@ -14,6 +14,7 @@ Static, no build step.
 
 - `index.html`: the live site (V1, editorial rows, Helvetica Neue). Case studies live in the `const CASES = [...]` array near the bottom. Services, about, coverage and contact are plain HTML above it.
 - `img/`: every photo, shared by both layouts.
+- `.htaccess` (security headers, 404 page, caching, hides the 2017 files), `404.html`, `robots.txt`, `sitemap.xml`, `llms.txt`, `og-image.jpg`, favicons: site plumbing, deployed with the rest. Canonical URLs use https://lescopines.de/.
 - `v2/index.html`: an alternative layout still in review (bento grid, Funnel fonts), not on lescopines.de. It has its own `CASES` array with extra fields (`tiles`, `type`).
 - `v5/`, `v6/`: redirects, leave alone.
 
@@ -28,7 +29,7 @@ Static, no build step.
 Sandra updates copy and images herself through Claude Code on the web. She is not technical. Treat any session as a content session unless the person says they are Frederik. In a content session:
 
 **Scope**
-- Edit copy and images only (plus `imprint.html` for imprint and privacy text): cases (`name`, `place`, `year`, `sector`, `scope`, `lede`, `body`, photos, order), services, about text, coverage, contact details, imprint and privacy text. Files touched: `index.html`, `img/`, and the "Open items" section of this file. Mirror case changes into `v2/index.html` too, copying the shape of an existing V2 case exactly, so V2 stays current while it is in review.
+- Edit copy and images only (plus `imprint.html` for imprint and privacy text): cases (`name`, `place`, `year`, `sector`, `scope`, `lede`, `body`, photos, order), services, about text, coverage, contact details, imprint and privacy text. Files touched: `index.html`, `llms.txt`, `img/`, and the "Open items" section of this file. Mirror case changes into `v2/index.html` too, copying the shape of an existing V2 case exactly, so V2 stays current while it is in review. Mirror case, service and contact changes into `llms.txt` as well (the case list there is what AI search reads, since cases are drawn by script).
 - Do not touch `<style>`, the `<head>`, the nav, the version switcher, class names, the script below the `CASES` array, `.github/`, `v5/`, `v6/`. A design or layout request goes to Frederik: say so and stop.
 
 **Facts**
